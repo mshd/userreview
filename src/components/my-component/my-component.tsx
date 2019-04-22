@@ -1,4 +1,6 @@
 import { Component, Prop } from '@stencil/core';
+
+import { State } from '@stencil/core';
 //import { format } from '../../utils/utils';
 
 @Component({
@@ -22,6 +24,7 @@ export class MyComponent {
    */
   @Prop() last: string;
   @Prop() columns: string;
+  @State() userReviews: Array<any>;
   //@State() cardsPerRow: number;
 
   //@Listen('window:resize')
@@ -37,75 +40,59 @@ export class MyComponent {
     }
   }
 */
+componentWillLoad() {
+  console.log("fetch data");
+  return fetch('data/userreview.json')
+  .then(response => response.json())
+  .then(data => {
+    this.userReviews = data;
+  });
+  
+}
+
+ stars(score,start,end){
+  //if(score){var title = ' title="'.$title.'"';}
+  if(score=="n/a" || score=="#N/A"|| score==null || score==""){return "&empty;";}
+  //if(is_string($score)) {return "Invalid";}
+  var percent = (score-start)*(100/(end-start));
+  var color;
+  if(percent>85){
+    color = "#007f4e";
+  }else if(percent>70){
+    color = "#73b143";
+  }else if(percent>50){
+    color = "#f8cc18";
+  }else if(percent>30){
+    color = "#f47324";
+  }else{
+    color = "#e22027";
+  }
+  //var emoji = "★★★★★";//"&#9733;&#9733;&#9733;&#9733;&#9733;";//
+  var style= 'width:'+percent+'%;color:'+color+';';
+  return <span title={ score } class="stars-container"><span class="stars-over" style={ style }>★★★★★</span>★★★★★</span>;
+}
+
   render() {
-    var cards = [{
-      "@context": "https://schema.org/",
-      "@type": "Review",
-      "itemReviewed": {
-        "@type": "Thing",
-        "name": "Super Book"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Joe"
-      },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": "7",
-        "bestRating": "10"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Washington Times"
-      }
-    },
-    {
-      "@context": "https://schema.org/",
-      "@type": "Review",
-      "itemReviewed": {
-        "@type": "Thing",
-        "name": "Super Book2"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Joe"
-      },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": "9",
-        "bestRating": "10"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Washington Times"
-      }
-    }];
-//require('./data/userreview.json');
-//JSON.parse(window.localStorage.getItem("data/userreview.json"))
-    console.log(cards);
+
+    console.log(this.userReviews);
     //for()
     //
     return (
-    //  <div>Hello, World! I'm {this.getText()}</div>
-    //);
-    //                 <a href={ entry.url } target="_blank"><img class="card-img-top" src={ entry.imageUrl }/></a>
 
-
-        <div>
-           <div class="col-lg-3 col-md-6 col-sd-12">
+        <div class="card-group container">
 
         {
-          cards.map(entry =>
+          this.userReviews.map(entry =>
              <div class="card">
                  <div class="card-body">
-                     <h4 class="card-title">{ entry.author.name } ({ entry.publisher.name })</h4>
-                     <p class="card-text">{ entry.reviewRating.ratingValue }/{ entry.reviewRating.bestRating }</p>
+                     <h4 class="card-title">{ entry.name ? entry.name : "untitled" }</h4>
+                     {  this.stars(entry.reviewRating.ratingValue,0,entry.reviewRating.bestRating) } 
+                     <p class="card-text">- { entry.author.name } ({ entry.publisher.name })</p>
                      <a href="" class="btn btn-success" target="_blank">Go to </a>
                  </div>
              </div>
          )
          }
-            </div>
 
          </div>
 

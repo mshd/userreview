@@ -34,6 +34,11 @@
           "attr": "middle"
         }
       ],
+      "states": [
+        {
+          "name": "userReviews"
+        }
+      ],
       "shadow": true
     }
   ],

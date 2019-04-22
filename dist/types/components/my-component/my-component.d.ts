@@ -13,5 +13,8 @@ export declare class MyComponent {
      */
     last: string;
     columns: string;
+    userReviews: Array<any>;
+    componentWillLoad(): Promise<void>;
+    stars(score: any, start: any, end: any): JSX.Element;
     render(): JSX.Element;
 }

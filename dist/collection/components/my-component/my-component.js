@@ -14,71 +14,58 @@ export class MyComponent {
         }
       }
     */
+    componentWillLoad() {
+        console.log("fetch data");
+        return fetch('data/userreview.json')
+            .then(response => response.json())
+            .then(data => {
+            this.userReviews = data;
+        });
+    }
+    stars(score, start, end) {
+        //if(score){var title = ' title="'.$title.'"';}
+        if (score == "n/a" || score == "#N/A" || score == null || score == "") {
+            return "&empty;";
+        }
+        //if(is_string($score)) {return "Invalid";}
+        var percent = (score - start) * (100 / (end - start));
+        var color;
+        if (percent > 85) {
+            color = "#007f4e";
+        }
+        else if (percent > 70) {
+            color = "#73b143";
+        }
+        else if (percent > 50) {
+            color = "#f8cc18";
+        }
+        else if (percent > 30) {
+            color = "#f47324";
+        }
+        else {
+            color = "#e22027";
+        }
+        //var emoji = "★★★★★";//"&#9733;&#9733;&#9733;&#9733;&#9733;";//
+        var style = 'width:' + percent + '%;color:' + color + ';';
+        return h("span", { title: score, class: "stars-container" },
+            h("span", { class: "stars-over", style: style }, "\u2605\u2605\u2605\u2605\u2605"),
+            "\u2605\u2605\u2605\u2605\u2605");
+    }
     render() {
-        var cards = [{
-                "@context": "https://schema.org/",
-                "@type": "Review",
-                "itemReviewed": {
-                    "@type": "Thing",
-                    "name": "Super Book"
-                },
-                "author": {
-                    "@type": "Person",
-                    "name": "Joe"
-                },
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "7",
-                    "bestRating": "10"
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "Washington Times"
-                }
-            },
-            {
-                "@context": "https://schema.org/",
-                "@type": "Review",
-                "itemReviewed": {
-                    "@type": "Thing",
-                    "name": "Super Book2"
-                },
-                "author": {
-                    "@type": "Person",
-                    "name": "Joe"
-                },
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "9",
-                    "bestRating": "10"
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "Washington Times"
-                }
-            }];
-        //require('./data/userreview.json');
-        //JSON.parse(window.localStorage.getItem("data/userreview.json"))
-        console.log(cards);
+        console.log(this.userReviews);
         //for()
         //
-        return (
-        //  <div>Hello, World! I'm {this.getText()}</div>
-        //);
-        //                 <a href={ entry.url } target="_blank"><img class="card-img-top" src={ entry.imageUrl }/></a>
-        h("div", null,
-            h("div", { class: "col-lg-3 col-md-6 col-sd-12" }, cards.map(entry => h("div", { class: "card" },
-                h("div", { class: "card-body" },
-                    h("h4", { class: "card-title" },
-                        entry.author.name,
-                        " (",
-                        entry.publisher.name,
-                        ")"),
-                    h("p", { class: "card-text" },
-                        entry.reviewRating.ratingValue,
-                        "/",
-                        entry.reviewRating.bestRating),
-                    h("a", { href: "", class: "btn btn-success", target: "_blank" }, "Go to ")))))));
+        return (h("div", { class: "card-group container" }, this.userReviews.map(entry => h("div", { class: "card" },
+            h("div", { class: "card-body" },
+                h("h4", { class: "card-title" }, entry.name ? entry.name : "untitled"),
+                this.stars(entry.reviewRating.ratingValue, 0, entry.reviewRating.bestRating),
+                h("p", { class: "card-text" },
+                    "- ",
+                    entry.author.name,
+                    " (",
+                    entry.publisher.name,
+                    ")"),
+                h("a", { href: "", class: "btn btn-success", target: "_blank" }, "Go to "))))));
     }
     static get is() { return "my-component"; }
     static get encapsulation() { return "shadow"; }
@@ -98,6 +85,9 @@ export class MyComponent {
         "middle": {
             "type": String,
             "attr": "middle"
+        },
+        "userReviews": {
+            "state": true
         }
     }; }
     static get style() { return "/**style-placeholder:my-component:**/"; }

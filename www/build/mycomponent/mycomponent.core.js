@@ -905,7 +905,17 @@ const update = async (plt, elm, perf, isInitialLoad, instance, ancestorHostEleme
       // haven't created a component instance for this host element yet!
       // create the instance from the user's component class
       // https://www.youtube.com/watch?v=olLxrojmvMg
-            instance = initComponentInstance(plt, elm, plt.hostSnapshotMap.get(elm), perf);
+            if (instance = initComponentInstance(plt, elm, plt.hostSnapshotMap.get(elm), perf), 
+      instance) 
+      // this is the initial load and the instance was just created
+      // fire off the user's componentWillLoad method (if one was provided)
+      // componentWillLoad only runs ONCE, after instance's element has been
+      // assigned as the host element, but BEFORE render() has been called
+      try {
+        instance.componentWillLoad && await instance.componentWillLoad();
+      } catch (e) {
+        plt.onError(e, 3 /* WillLoadError */ , elm);
+      }
     } else false;
     // if this component has a render function, let's fire
     // it off and generate a vnode for this
@@ -975,9 +985,9 @@ const update = async (plt, elm, perf, isInitialLoad, instance, ancestorHostEleme
 };
 
 const defineMember = (plt, property, elm, instance, memberName, hostSnapshot, perf, hostAttributes, hostAttrValue) => {
-  if (property.type || false) {
+  if (property.type || property.state) {
     const values = plt.valuesMap.get(elm);
-    !property.attr || void 0 !== values[memberName] && '' !== values[memberName] || 
+    !property.state && true && (!property.attr || void 0 !== values[memberName] && '' !== values[memberName] || 
     // check the prop value from the host element attribute
     (hostAttributes = hostSnapshot && hostSnapshot.$attributes) && isDef(hostAttrValue = hostAttributes[property.attr]) && (
     // looks like we've got an attribute value
@@ -998,7 +1008,7 @@ const defineMember = (plt, property, elm, instance, memberName, hostSnapshot, pe
     // for the client only, let's delete its "own" property
     // this way our already assigned getter/setter on the prototype kicks in
     // the very special case is to NOT do this for "mode"
-    'mode' !== memberName && delete elm[memberName]), instance.hasOwnProperty(memberName) && void 0 === values[memberName] && (
+    'mode' !== memberName && delete elm[memberName])), instance.hasOwnProperty(memberName) && void 0 === values[memberName] && (
     // @Prop() or @Prop({mutable:true}) or @State()
     // we haven't yet got a value from the above checks so let's
     // read any "own" property instance values already set
@@ -1013,7 +1023,7 @@ const defineMember = (plt, property, elm, instance, memberName, hostSnapshot, pe
       return values = plt.valuesMap.get(plt.hostElementMap.get(this)), values && values[memberName];
     }, function setComponentProp(newValue, elm) {
       // component instance prop/state setter (cannot be arrow fn)
-      elm = plt.hostElementMap.get(this), elm && (property.mutable ? setValue(plt, elm, memberName, newValue, perf) : console.warn(`@Prop() "${memberName}" on "${elm.tagName}" cannot be modified.`));
+      elm = plt.hostElementMap.get(this), elm && (property.state || property.mutable ? setValue(plt, elm, memberName, newValue, perf) : console.warn(`@Prop() "${memberName}" on "${elm.tagName}" cannot be modified.`));
     });
   } else false;
 };
@@ -1559,4 +1569,4 @@ const initHostElement = (plt, cmpMeta, HostElementConstructor, hydratedCssClass,
   // but note that the components have not fully loaded yet
   App.initialized = true;
 })(n, x, w, d, r, h, c);
-})(window,document,{},"mycomponent","hydrated",[["my-component","my-component",1,[["columns",1,0,1,2],["first",1,0,1,2],["last",1,0,1,2],["middle",1,0,1,2]],1]]);
+})(window,document,{},"mycomponent","hydrated",[["my-component","my-component",1,[["columns",1,0,1,2],["first",1,0,1,2],["last",1,0,1,2],["middle",1,0,1,2],["userReviews",16]],1]]);

@@ -30,5 +30,27 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/js/mdb.min.js"></script>
+<script>
+function stars(score,start,end){
+  //if(score){var title = ' title="'.$title.'"';}
+  if(score=="n/a" || score=="#N/A"|| score==null || score==""){return "&empty;";}
+  //if(is_string($score)) {return "Invalid";}
+  var percent = (score-start)*(100/(end-start));
+  var color,stars;
+  if(percent>85){
+    color = "#007f4e";
+  }else if(percent>70){
+    color = "#73b143";
+  }else if(percent>50){
+    color = "#f8cc18";
+  }else if(percent>30){
+    color = "#f47324";
+  }else{
+    color = "#e22027";
+  }
+  var emoji = "★★★★★";//"&#9733;&#9733;&#9733;&#9733;&#9733;";//
+  return '<span title="'+score+'" class="stars-container"><span class="stars-over" style="width:'+percent+'%;color:'+color+';">'+emoji+'</span>'+emoji+'</span>';
+}
+</script>
 </body>
 </html>

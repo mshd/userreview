@@ -7,7 +7,7 @@
   },
   "author": {
     "@type": "Person",
-    "name": "Joe"
+    "name": "John Doe"
   },
   "reviewRating": {
     "@type": "Rating",
@@ -28,15 +28,21 @@
   },
   "author": {
     "@type": "Person",
-    "name": "Joe"
+    "name": "Jane Doey"
   },
   "reviewRating": {
     "@type": "Rating",
     "ratingValue": "9",
     "bestRating": "10"
+
   },
+  "name": "The phone is superb",
+
+  "reviewBody": "The seafood is great.",
+  "datePublished": "2006-05-04",
+
   "publisher": {
     "@type": "Organization",
-    "name": "Washington Times"
+    "name": "New York Times"
   }
 }]

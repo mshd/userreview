@@ -11,7 +11,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    content: '★★★★★';
+    content: 'â˜…â˜…â˜…â˜…â˜…';
     color:lightgray;
   }
   .stars-over {
