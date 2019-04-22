@@ -66,8 +66,8 @@ export class MyComponent {
         //  <div>Hello, World! I'm {this.getText()}</div>
         //);
         //                 <a href={ entry.url } target="_blank"><img class="card-img-top" src={ entry.imageUrl }/></a>
-        h("div", null, cards.map(entry => h("div", { class: "col-lg-3 col-md-6 col-sd-12" },
-            h("div", { class: "card" },
+        h("div", null,
+            h("div", { class: "col-lg-3 col-md-6 col-sd-12" }, cards.map(entry => h("div", { class: "card" },
                 h("div", { class: "card-body" },
                     h("h4", { class: "card-title" },
                         entry.author.name,

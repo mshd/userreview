@@ -68,8 +68,8 @@ class MyComponent {
         //  <div>Hello, World! I'm {this.getText()}</div>
         //);
         //                 <a href={ entry.url } target="_blank"><img class="card-img-top" src={ entry.imageUrl }/></a>
-        h("div", null, cards.map(entry => h("div", { class: "col-lg-3 col-md-6 col-sd-12" },
-            h("div", { class: "card" },
+        h("div", null,
+            h("div", { class: "col-lg-3 col-md-6 col-sd-12" }, cards.map(entry => h("div", { class: "card" },
                 h("div", { class: "card-body" },
                     h("h4", { class: "card-title" },
                         entry.author.name,
@@ -102,7 +102,7 @@ class MyComponent {
             "attr": "middle"
         }
     }; }
-    static get style() { return ""; }
+    static get style() { return "\@import url(\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css\");\n\@import url(\"https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css\");"; }
 }
 
 export { MyComponent };

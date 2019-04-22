@@ -92,9 +92,10 @@ export class MyComponent {
 
 
         <div>
+           <div class="col-lg-3 col-md-6 col-sd-12">
+
         {
           cards.map(entry =>
-             <div class="col-lg-3 col-md-6 col-sd-12">
              <div class="card">
                  <div class="card-body">
                      <h4 class="card-title">{ entry.author.name } ({ entry.publisher.name })</h4>
@@ -102,9 +103,10 @@ export class MyComponent {
                      <a href="" class="btn btn-success" target="_blank">Go to </a>
                  </div>
              </div>
-             </div>
          )
          }
+            </div>
+
          </div>
 
       );
