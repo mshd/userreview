@@ -20,3 +20,7 @@
     left: 0;
     overflow: hidden;
   }
+
+  .container{
+    flex-wrap: nowrap | wrap | wrap-reverse;
+  }

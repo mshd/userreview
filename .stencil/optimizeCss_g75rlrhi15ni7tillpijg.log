@@ -22,5 +22,6 @@
   }
 
   .container{
+    -ms-flex-wrap: nowrap | wrap | wrap-reverse;
     flex-wrap: nowrap | wrap | wrap-reverse;
   }
