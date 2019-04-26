@@ -20,21 +20,6 @@ git clone https://github.com/mshd/userreview
 cd userreview
 npm start```
 
-and run:
-
-```bash
-npm install
-npm start
-```
-
-To build the component for production, run:
-
-```bash
-npm run build
-```
-
-
-
 
 ### Autor
 - M. Schibel
