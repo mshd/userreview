@@ -18,11 +18,111 @@ class MyComponent {
     */
     componentWillLoad() {
         console.log("fetch data");
+        this.userReviews = this.items();
+        return; // this.items();
+        /*
         return fetch('data/userreview.json')
-            .then(response => response.json())
-            .then(data => {
-            this.userReviews = data;
+        .then(response => response.json())
+        .then(data => {
+          this.userReviews = data;
         });
+        */
+    }
+    items() {
+        return [{
+                "@context": "https://schema.org/",
+                "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Thing",
+                    "name": "Super Book"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "John Doe"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "7",
+                    "bestRating": "10"
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Washington Times"
+                },
+                "image": "https://upload.wikimedia.org/wikipedia/en/3/32/Rye_catcher.jpg"
+            },
+            {
+                "@context": "https://schema.org/",
+                "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Thing",
+                    "name": "Super Book2"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "Jane Doey"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "9",
+                    "bestRating": "10"
+                },
+                "name": "The phone is superb",
+                "reviewBody": "The seafood is great.",
+                "datePublished": "2006-05-04",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "New York Times"
+                }
+            },
+            {
+                "@context": "https://schema.org/",
+                "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Thing",
+                    "name": "Super Book2"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "Jane Doey"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "9",
+                    "bestRating": "10"
+                },
+                "name": "मोबाइल राम्रो छ",
+                "reviewBody": "धेरै राम्रो",
+                "datePublished": "2006-05-04",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "New York Times"
+                }
+            },
+            {
+                "@context": "https://schema.org/",
+                "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Thing",
+                    "name": "Super Book2"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "Jane Doey"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "9",
+                    "bestRating": "10"
+                },
+                "name": "Телефон превосходный",
+                "reviewBody": "The seafood is great.",
+                "datePublished": "2006-05-04",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "New York Times"
+                }
+            }];
     }
     stars(score, start, end) {
         //if(score){var title = ' title="'.$title.'"';}
@@ -60,47 +160,20 @@ class MyComponent {
     render() {
         console.log(this.userReviews);
         //for()
-        //
-        return (h("div", { class: "card-group container" },
-            h("div", { class: "card" },
-                h("div", { class: "view overlay" },
-                    h("img", { class: "card-img-top", src: "https://mdbootstrap.com/img/Photos/Others/food.jpg", alt: "Card image cap" }),
-                    h("a", null,
-                        h("div", { class: "mask rgba-white-slight" }))),
-                h("a", { class: "btn-floating btn-action ml-auto mr-4 mdb-color lighten-3" },
-                    h("i", { class: "fas fa-chevron-right pl-1" })),
-                h("div", { class: "card-body" },
-                    h("h4", { class: "card-title" }, "Card title"),
-                    h("hr", null,
-                        h("p", { class: "card-text" }, "Some quick example text to build on the card title and make up the bulk of the card's content.")),
-                    h("div", { class: "rounded-bottom mdb-color lighten-3 text-center pt-3" },
-                        h("ul", { class: "list-unstyled list-inline font-small" },
-                            h("li", { class: "list-inline-item pr-2 white-text" },
-                                h("i", { class: "far fa-clock pr-1" }),
-                                "05/10/2015"),
-                            h("li", { class: "list-inline-item pr-2" },
-                                h("a", { href: "#", class: "white-text" },
-                                    h("i", { class: "far fa-comments pr-1" }),
-                                    "12")),
-                            h("li", { class: "list-inline-item pr-2" },
-                                h("a", { href: "#", class: "white-text" },
-                                    h("i", { class: "fab fa-facebook-f pr-1" }, " "),
-                                    "21")),
-                            h("li", { class: "list-inline-item" },
-                                h("a", { href: "#", class: "white-text" },
-                                    h("i", { class: "fab fa-twitter pr-1" }, " "),
-                                    "5")))))),
-            this.userReviews.map(entry => h("div", { class: "card col-sm col-md-4 col-xs-12" },
-                h("div", { class: "card-body" },
-                    h("h4", { class: "card-title" }, entry.name ? entry.name : "untitled"),
-                    this.stars(entry.reviewRating.ratingValue, 0, entry.reviewRating.bestRating),
-                    h("p", { class: "card-text" },
-                        "- ",
-                        entry.author.name,
-                        " (",
-                        entry.publisher.name,
-                        ")"),
-                    h("a", { href: "", class: "btn btn-success", target: "_blank" }, "Go to "))))));
+        //col-sm col-md-4 col-xs-12
+        //                     <!-- <a href="" class="btn btn-success" target="_blank">Go to </a> -->
+        return (h("div", { class: "card-columns" }, this.userReviews.map(entry => h("div", { class: "card " },
+            entry.image ? h("img", { class: "card-img-top", src: entry.image, alt: "Card image cap" }) : "",
+            h("div", { class: "card-body" },
+                h("h4", { class: "card-title" }, entry.name ? entry.name : "untitled"),
+                this.stars(entry.reviewRating.ratingValue, 0, entry.reviewRating.bestRating),
+                h("p", { class: "card-text" },
+                    entry.reviewBody,
+                    " - ",
+                    entry.author.name,
+                    " (",
+                    entry.publisher.name,
+                    ")"))))));
     }
     static get is() { return "my-component"; }
     static get encapsulation() { return "shadow"; }
@@ -125,7 +198,7 @@ class MyComponent {
             "state": true
         }
     }; }
-    static get style() { return "\@import url(\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css\");\n\@import url(\"https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css\");\n\n.stars-container {\n    position: relative;\n    display: inline-block;\n    color: transparent;\n  }\n  \n  .stars-container:before{\n    position: absolute;\n    top: 0;\n    left: 0;\n    content: '★★★★★';\n    color:lightgray;\n  }\n  .stars-over {\n    position: absolute;\n    top: 0;\n    left: 0;\n    overflow: hidden;\n  }\n\n  .container{\n    -ms-flex-wrap: nowrap | wrap | wrap-reverse;\n    flex-wrap: nowrap | wrap | wrap-reverse;\n  }"; }
+    static get style() { return "\@import url(\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css\");\n\@import url(\"https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css\");\n\n.stars-container {\n    position: relative;\n    display: inline-block;\n    color: transparent;\n  }\n  \n  .stars-container:before{\n    position: absolute;\n    top: 0;\n    left: 0;\n    content: '★★★★★';\n    color:lightgray;\n  }\n  .stars-over {\n    position: absolute;\n    top: 0;\n    left: 0;\n    overflow: hidden;\n  }\n\n  /*.container{\n    flex-wrap: nowrap | wrap | wrap-reverse;\n  }\n*/\n  .card-columns {\n    \@include media-breakpoint-only(lg) {\n      -webkit-column-count: 4;\n      column-count: 4;\n    }\n    \@include media-breakpoint-only(xl) {\n      -webkit-column-count: 5;\n      column-count: 5;\n    }\n  }"; }
 }
 
 export { MyComponent };

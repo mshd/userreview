@@ -42,14 +42,122 @@ export class MyComponent {
 */
 componentWillLoad() {
   console.log("fetch data");
+  this.userReviews = this.items();
+  return;// this.items();
+  /*
   return fetch('data/userreview.json')
   .then(response => response.json())
   .then(data => {
     this.userReviews = data;
   });
-  
+  */
 }
+items(){
+  return [{
+    "@context": "https://schema.org/",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "Thing",
+      "name": "Super Book"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "John Doe"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "7",
+      "bestRating": "10"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Washington Times"
+    },
+    "image": "https://upload.wikimedia.org/wikipedia/en/3/32/Rye_catcher.jpg"
+  },
+  {
+    "@context": "https://schema.org/",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "Thing",
+      "name": "Super Book2"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Jane Doey"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "9",
+      "bestRating": "10"
+  
+    },
+    "name": "The phone is superb",
+  
+    "reviewBody": "The seafood is great.",
+    "datePublished": "2006-05-04",
+  
+    "publisher": {
+      "@type": "Organization",
+      "name": "New York Times"
+    }
+  },
+  {
+    "@context": "https://schema.org/",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "Thing",
+      "name": "Super Book2"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Jane Doey"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "9",
+      "bestRating": "10"
+  
+    },
+    "name": "मोबाइल राम्रो छ",
+  
+    "reviewBody": "धेरै राम्रो",
+    "datePublished": "2006-05-04",
+  
+    "publisher": {
+      "@type": "Organization",
+      "name": "New York Times"
+    }
+  },
+  {
+    "@context": "https://schema.org/",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "Thing",
+      "name": "Super Book2"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Jane Doey"
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "9",
+      "bestRating": "10"
+  
+    },
+    "name": "Телефон превосходный",
+  
+    "reviewBody": "The seafood is great.",
+    "datePublished": "2006-05-04",
+  
+    "publisher": {
+      "@type": "Organization",
+      "name": "New York Times"
+    }
+  }];
 
+}
  stars(score,start,end){
   //if(score){var title = ' title="'.$title.'"';}
   if(score=="n/a" || score=="#N/A"|| score==null || score==""){return "&empty;";}
@@ -80,50 +188,24 @@ componentWillLoad() {
 
     console.log(this.userReviews);
     //for()
-    //
+    //col-sm col-md-4 col-xs-12
+    //                     <!-- <a href="" class="btn btn-success" target="_blank">Go to </a> -->
+
     return (
 
-        <div class="card-group container">
+        <div class="card-columns">
 
-<div class="card">
-
-  <div class="view overlay">
-    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/food.jpg" alt="Card image cap" />
-    <a>
-      <div class="mask rgba-white-slight"></div>
-    </a>
-  </div>
-
-  <a class="btn-floating btn-action ml-auto mr-4 mdb-color lighten-3"><i class="fas fa-chevron-right pl-1"></i></a>
-
-  <div class="card-body">
-
-    <h4 class="card-title">Card title</h4>
-    <hr>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-  </div>
-
-  <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
-    <ul class="list-unstyled list-inline font-small">
-      <li class="list-inline-item pr-2 white-text"><i class="far fa-clock pr-1"></i>05/10/2015</li>
-      <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="far fa-comments pr-1"></i>12</a></li>
-      <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="fab fa-facebook-f pr-1"> </i>21</a></li>
-      <li class="list-inline-item"><a href="#" class="white-text"><i class="fab fa-twitter pr-1"> </i>5</a></li>
-    </ul>
-  </div>
-
-</div></div>
 
         {
           this.userReviews.map(entry =>
-             <div class="card col-sm col-md-4 col-xs-12">
+             <div class="card ">
+                  { entry.image ? <img class="card-img-top" src={ entry.image } alt="Card image cap" /> : "" }
                  <div class="card-body">
                      <h4 class="card-title">{ entry.name ? entry.name : "untitled" }</h4>
                      {  this.stars(entry.reviewRating.ratingValue,0,entry.reviewRating.bestRating) } 
-                     <p class="card-text">- { entry.author.name } ({ entry.publisher.name })</p>
-                     <a href="" class="btn btn-success" target="_blank">Go to </a>
+                     <p class="card-text">{ entry.reviewBody } - { entry.author.name } ({ entry.publisher.name })</p>
                  </div>
+
              </div>
          )
          }

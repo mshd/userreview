@@ -21,15 +21,18 @@
     overflow: hidden;
   }
 
-  /*.container{
+  .container{
+    -ms-flex-wrap: nowrap | wrap | wrap-reverse;
     flex-wrap: nowrap | wrap | wrap-reverse;
   }
-*/
+
   .card-columns {
     @include media-breakpoint-only(lg) {
+      -webkit-column-count: 4;
       column-count: 4;
     }
     @include media-breakpoint-only(xl) {
+      -webkit-column-count: 5;
       column-count: 5;
     }
   }
