@@ -18,7 +18,10 @@ To start building a new web component using Stencil, clone this repo to a new di
 ```bash
 git clone https://github.com/mshd/userreview
 cd userreview
-npm start```
+npm start
+```
+
+
 
 
 ### Autor
