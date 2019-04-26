@@ -239,6 +239,82 @@ class MyComponent {
                 },
                 "name": "consectetur adipiscing elit",
                 "reviewBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+            },
+            {
+                "@context": "https://schema.org/",
+                "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Thing",
+                    "name": "Super Book2"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "John Doe"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "9",
+                    "bestRating": "10"
+                },
+                "name": "consectetur adipiscing elit",
+                "reviewBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+            },
+            {
+                "@context": "https://schema.org/",
+                "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Thing",
+                    "name": "Super Book2"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "John Doe"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "9",
+                    "bestRating": "10"
+                },
+                "name": "consectetur adipiscing elit",
+                "reviewBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+            },
+            {
+                "@context": "https://schema.org/",
+                "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Thing",
+                    "name": "Super Book2"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "John Doe"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "9",
+                    "bestRating": "10"
+                },
+                "name": "consectetur adipiscing elit",
+                "reviewBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+            },
+            {
+                "@context": "https://schema.org/",
+                "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Thing",
+                    "name": "Super Book2"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "John Doe"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "9",
+                    "bestRating": "10"
+                },
+                "name": "consectetur adipiscing elit",
+                "reviewBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
             }, {
                 "@context": "https://schema.org/",
                 "@type": "Review",
@@ -318,6 +394,26 @@ class MyComponent {
                     "bestRating": "10"
                 },
                 "name": "consectetur adipiscing elit",
+                "reviewBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+            },
+            {
+                "@context": "https://schema.org/",
+                "@type": "Review",
+                "itemReviewed": {
+                    "@type": "Thing",
+                    "name": "Super Book2"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "John Doe"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "8",
+                    "bestRating": "10"
+                },
+                "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Venison_leg_on_applesauce_with_dumbling_and_vegetable.jpg/550px-Venison_leg_on_applesauce_with_dumbling_and_vegetable.jpg",
+                "name": "Tasty meal",
                 "reviewBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
             },
             {

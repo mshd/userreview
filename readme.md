@@ -3,7 +3,6 @@
 # UserReview
 
 This is a starter project for building a standalone Web Component using Stencil.
-
 Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
 
 # Aufgabe
@@ -11,9 +10,8 @@ Stencil is also great for building entire apps. For that, use the [stencil-app-s
 Schema.org kennt die "UserReview“ als Datensatz. Betten Sie 20 Beispiel-Datensätze (die eine weite Varianz an Inhalten und vorhandenen und nicht vorhandenen Feldern bieten) davon als Google-Kompatibles-JSON-LD eine HTML-Datei ein.
 
 Erstellen sie mithilfe von Stencil.js mindestens eine Web-Komponente, welche die Datensätze (besprochen im vorherigen Absatz) ausliest und dann pro Datensatz auf je eine Karte (etwa wie im Material Design definiert) rendert. Beachten Sie hierbei, dass die Datensätze variieren, trotz Variation die Karten aber gut aussehen sollen.
-## Getting Started
+## Installation
 
-To start building a new web component using Stencil, clone this repo to a new directory:
 
 ```bash
 git clone https://github.com/mshd/userreview
